@@ -46,6 +46,9 @@
 (require 'uniquify)
 (require 'ansi-color)
 (require 'recentf)
+;; Disable cleanup to prevent Tramp from loading
+(setq recentf-auto-cleanup 'never)
+(recentf-mode 1)
 
 ;; backport some functionality to Emacs 22 if needed
 (require 'dominating-file)
