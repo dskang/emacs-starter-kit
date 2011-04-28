@@ -70,7 +70,7 @@
 ;;      (insert-pair)))
 
 ;; Auto-indentation
-(dolist (hook '(c-mode-hook python-mode-hook html-mode-hook php-mode-hook))
+(dolist (hook '(c-mode-hook python-mode-hook java-mode-hook html-mode-hook css-mode-hook php-mode-hook))
   (add-hook hook '(lambda () (local-set-key "\C-m" 'reindent-then-newline-and-indent))))
 
 ;; Tabs
@@ -88,26 +88,14 @@
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'nil)
 
-;; Use command key as meta
-(setq mac-command-modifier 'meta)
-(setq mac-option-modifier 'nil)
-
 ;; Don't ask for confirmation upon creating new buffer or file
 (setq confirm-nonexistent-file-or-buffer 'nil)
-
-;; Set PATH in emacs shell to be same as Terminal.app for Macs
-;; (defun set-exec-path-from-shell-PATH ()
-;;   (let ((path-from-shell 
-;;          (replace-regexp-in-string "[[:space:]\n]*$" "" 
-;;                                    (shell-command-to-string "$SHELL -l -c 'echo $PATH'"))))
-;;     (setenv "PATH" path-from-shell)
-;;     (setq exec-path (split-string path-from-shell path-separator))))
-;; (when (equal system-type 'darwin) (set-exec-path-from-shell-PATH))
 
 ;; Enable ido everywhere
 (ido-everywhere t)
 
 ;; Emulates vi so that <%> key shows matching parenthesis
+;; http://www.gnu.org/software/emacs/emacs-faq.text
 (global-set-key "%" 'match-paren)
     (defun match-paren (arg)
       "Go to the matching paren if on a paren; otherwise insert %."
@@ -117,14 +105,52 @@
             (t (self-insert-command (or arg 1)))))
 
 ;; Dedicated windows
-(defun toggle-dedicated-window ()
+;; http://dfan.org/blog/2009/02/19/emacs-dedicated-windows/
+(defun toggle-current-window-dedication ()
   "Toggles whether the selected window is dedicated."
   (interactive)
-  (if (window-dedicated-p (selected-window))
-      (progn
-        (set-window-dedicated-p (selected-window) nil)
-        (minibuffer-message "Window is no longer dedicated."))
-    (progn
-      (set-window-dedicated-p (selected-window) t)
-      (minibuffer-message "Window is now dedicated."))))
-(global-set-key "\C-cd" 'toggle-dedicated-window)
+  (let* ((window    (selected-window))
+         (dedicated (window-dedicated-p window)))
+    (set-window-dedicated-p window (not dedicated))
+    (message "Window %sdedicated to %s"
+             (if dedicated "no longer " "")
+             (buffer-name))))
+(global-set-key "\C-cd" 'toggle-current-window-dedication)
+
+;; Apply shell environment to emacs
+;; http://paste.lisp.org/display/111574
+(defun env-line-to-cons (env-line)
+  "Convert a string of the form \"VAR=VAL\" to a 
+cons cell containing (\"VAR\" . \"VAL\")."
+  (if (string-match "\\([^=]+\\)=\\(.*\\)" env-line)
+    (cons (match-string 1 env-line) (match-string 2 env-line))))
+
+(defun interactive-env-alist (&optional shell-cmd env-cmd)
+  "Launch /usr/bin/env or the equivalent from an interactive
+shell, parsing and returning the environment as an alist."
+  (let ((cmd (concat (or shell-cmd "$SHELL -ic")
+                     " "
+                     (or env-cmd "/usr/bin/env"))))
+    (mapcar 'env-line-to-cons
+            (remove-if
+             (lambda (str)
+               (string-equal str ""))
+             (split-string (shell-command-to-string cmd) "[\r\n]")))))
+
+(defun setenv-from-cons (var-val)
+  "Set an environment variable from a cons cell containing 
+two strings, where the car is the variable name and cdr is 
+the value, e.g. (\"VAR\" . \"VAL\")"
+  (setenv (car var-val) (cdr var-val)))
+
+(defun setenv-from-shell-environment (&optional shell-cmd env-cmd)
+  "Apply the environment reported by `/usr/bin/env' (or env-cmd) 
+as launched by `$SHELL -ic' (or shell-cmd) to the current 
+environment."
+  (mapc 'setenv-from-cons (interactive-env-alist shell-cmd env-cmd)))
+
+(setenv-from-shell-environment)
+(setq exec-path (split-string (getenv "PATH") path-separator))
+
+;; Set columns of erc to 72
+(setq erc-fill-column 72)
