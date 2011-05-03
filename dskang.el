@@ -154,3 +154,13 @@ environment."
 
 ;; Set columns of erc to 72
 (setq erc-fill-column 72)
+
+;; File associations
+(setq auto-mode-alist (cons '("README" . text-mode) auto-mode-alist))
+
+;; Display date and time in status bar
+(setq display-time-day-and-date t)
+(display-time)
+
+;; Start Emacs server
+(server-start)
