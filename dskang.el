@@ -14,10 +14,6 @@
 ; Enable the Ctrl-x Ctrl-m sequence for Alt-x
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 
-; Prefer backward-kill-word over Backspace
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
-
 ; Set the comment character for asm-mode to '#'.
 (setq asm-comment-char ?#)
 
@@ -93,16 +89,6 @@
 
 ;; Enable ido everywhere
 (ido-everywhere t)
-
-;; Emulates vi so that <%> key shows matching parenthesis
-;; http://www.gnu.org/software/emacs/emacs-faq.text
-(global-set-key "%" 'match-paren)
-    (defun match-paren (arg)
-      "Go to the matching paren if on a paren; otherwise insert %."
-      (interactive "p")
-      (cond ((looking-at "\\s\(") (forward-list 1) (backward-char 1))
-            ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
-            (t (self-insert-command (or arg 1)))))
 
 ;; Dedicated windows
 ;; http://dfan.org/blog/2009/02/19/emacs-dedicated-windows/
