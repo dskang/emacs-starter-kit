@@ -14,6 +14,10 @@
 ; Enable the Ctrl-x Ctrl-m sequence for Alt-x
 (global-set-key "\C-x\C-m" 'execute-extended-command)
 
+; Prefer backward-kill-word over Backspace
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+
 ; Set the comment character for asm-mode to '#'.
 (setq asm-comment-char ?#)
 
