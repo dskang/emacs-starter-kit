@@ -118,7 +118,7 @@ cons cell containing (\"VAR\" . \"VAL\")."
 (defun interactive-env-alist (&optional shell-cmd env-cmd)
   "Launch /usr/bin/env or the equivalent from an interactive
 shell, parsing and returning the environment as an alist."
-  (let ((cmd (concat (or shell-cmd "$SHELL -ic")
+  (let ((cmd (concat (or shell-cmd "$SHELL -lc")
                      " "
                      (or env-cmd "/usr/bin/env"))))
     (mapcar 'env-line-to-cons
@@ -135,7 +135,7 @@ the value, e.g. (\"VAR\" . \"VAL\")"
 
 (defun setenv-from-shell-environment (&optional shell-cmd env-cmd)
   "Apply the environment reported by `/usr/bin/env' (or env-cmd) 
-as launched by `$SHELL -ic' (or shell-cmd) to the current 
+as launched by `$SHELL -lc' (or shell-cmd) to the current 
 environment."
   (mapc 'setenv-from-cons (interactive-env-alist shell-cmd env-cmd)))
 
