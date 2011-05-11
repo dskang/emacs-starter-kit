@@ -70,8 +70,16 @@
 ;;      (insert-pair)))
 
 ;; Auto-indentation
-(dolist (hook '(c-mode-hook python-mode-hook java-mode-hook html-mode-hook css-mode-hook php-mode-hook))
+(dolist (hook '(c-mode-hook
+                java-mode-hook
+                html-mode-hook
+                css-mode-hook
+                php-mode-hook))
   (add-hook hook '(lambda () (local-set-key "\C-m" 'reindent-then-newline-and-indent))))
+
+;; Don't reindent current line in Python
+(add-hook 'python-mode-hook '(lambda () 
+     (define-key python-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Tabs
 (setq-default indent-tabs-mode nil)
