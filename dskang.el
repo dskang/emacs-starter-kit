@@ -165,6 +165,8 @@ environment."
 
 ;; File associations
 (setq auto-mode-alist (cons '("README" . text-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
 ;; Display date and time in status bar
 (setq display-time-day-and-date t)
