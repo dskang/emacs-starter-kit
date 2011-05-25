@@ -160,8 +160,8 @@ environment."
 
 ;; ERC settings
 ;; (setq erc-fill-column 72)
-(require 'erc-highlight-nicknames)
-(erc-highlight-nicknames-enable)
+;; (require 'erc-highlight-nicknames)
+;; (erc-highlight-nicknames-enable)
 
 ;; File associations
 (setq auto-mode-alist (cons '("README" . text-mode) auto-mode-alist))
