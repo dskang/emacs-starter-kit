@@ -93,9 +93,9 @@
 (require 'color-theme)
 
 ;; Use the solarized-dark color theme
-(add-to-list 'load-path (concat user-specific-dir "/color-theme-solarized"))
-(require 'color-theme-solarized)
-(color-theme-solarized-dark)
+;; (add-to-list 'load-path (concat user-specific-dir "/color-theme-solarized"))
+;; (require 'color-theme-solarized)
+;; (color-theme-solarized-dark)
 
 ;; Tramp
 (setq tramp-default-method "ssh")
