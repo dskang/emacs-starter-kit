@@ -158,8 +158,10 @@ environment."
 (setenv-from-shell-environment)
 (setq exec-path (split-string (getenv "PATH") path-separator))
 
-;; Set columns of erc to 72
-(setq erc-fill-column 72)
+;; ERC settings
+;; (setq erc-fill-column 72)
+(require 'erc-highlight-nicknames)
+(erc-highlight-nicknames-enable)
 
 ;; File associations
 (setq auto-mode-alist (cons '("README" . text-mode) auto-mode-alist))
