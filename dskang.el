@@ -173,4 +173,4 @@ environment."
 (display-time)
 
 ;; Start Emacs server
-(server-start)
+;; (server-start)
