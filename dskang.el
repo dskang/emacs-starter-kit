@@ -21,6 +21,9 @@
 ; Set the comment character for asm-mode to '#'.
 (setq asm-comment-char ?#)
 
+; Indent using spaces instead of tabs
+(setq indent-tabs-mode nil)
+
 ; Indent using spaces instead of tabs in c-mode and asm-mode.
 (defun my-c-mode-common-hook ()
    (setq indent-tabs-mode nil))
