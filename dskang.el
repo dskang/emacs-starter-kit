@@ -177,3 +177,19 @@ environment."
 
 ;; Start Emacs server
 ;; (server-start)
+
+;; Disable vc-git
+(setq vc-handled-backends nil)
+
+;; Split into as many vertical windows as possible
+(defun smart-split ()
+  "Split the frame into 100-column sub-windows, and make sure no window has
+   fewer than 100 columns."
+  (interactive)
+  (defun smart-split-helper (w)
+    "Helper function to split a given window into two, the first of which has
+     100 columns."
+    (if (> (window-width w) (* 2 101))
+        (let ((w2 (split-window w 102 t)))
+          (smart-split-helper w2))))
+    (smart-split-helper nil))
