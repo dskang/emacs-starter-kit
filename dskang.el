@@ -77,7 +77,8 @@
                 java-mode-hook
                 html-mode-hook
                 css-mode-hook
-                php-mode-hook))
+                php-mode-hook
+                js-mode-hook))
   (add-hook hook '(lambda () (local-set-key "\C-m" 'reindent-then-newline-and-indent))))
 
 ;; Don't reindent current line in Python
@@ -98,7 +99,7 @@
 ;; Use the solarized-dark color theme
 (add-to-list 'load-path (concat user-specific-dir "/color-theme-solarized"))
 (require 'color-theme-solarized)
-;; (color-theme-solarized-dark)
+(color-theme-solarized-dark)
 
 ;; Tramp
 (setq tramp-default-method "ssh")
@@ -193,3 +194,6 @@ environment."
         (let ((w2 (split-window w 102 t)))
           (smart-split-helper w2))))
     (smart-split-helper nil))
+
+;; Facebook JS indentation style
+(setq js-indent-level 2)
