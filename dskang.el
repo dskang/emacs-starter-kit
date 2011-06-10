@@ -177,7 +177,7 @@ environment."
 (display-time)
 
 ;; Start Emacs server
-;; (server-start)
+(server-start)
 
 ;; Disable vc-git
 (setq vc-handled-backends nil)
@@ -196,4 +196,13 @@ environment."
     (smart-split-helper nil))
 
 ;; Facebook JS indentation style
-(setq js-indent-level 2)
+(setq-default js-indent-level 2)
+
+;; Facebook Java indentation style
+;; (setq-default c-basic-offset 2)
+
+;; Most files I'm working with use 4 space tabs...
+(setq-default c-basic-offset 4)
+
+;; Facebook Python indentation style
+(setq-default python-indent 2)
