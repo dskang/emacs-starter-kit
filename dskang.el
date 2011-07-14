@@ -179,9 +179,6 @@ environment."
 ;; Start Emacs server
 (server-start)
 
-;; Disable vc-git
-(setq vc-handled-backends nil)
-
 ;; Split into as many vertical windows as possible
 (defun smart-split ()
   "Split the frame into 100-column sub-windows, and make sure no window has
@@ -206,3 +203,17 @@ environment."
 
 ;; Facebook Python indentation style
 (setq-default python-indent 2)
+
+;; Hiding ^M in files
+;; http://stackoverflow.com/questions/730751/hiding-m-in-emacs
+(defun remove-dos-eol ()
+  "Do not show ^M in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+
+;; Disable vc-git
+(setq vc-handled-backends nil)
+
+;; Magit
+(global-set-key "\C-cg" 'magit-status)
