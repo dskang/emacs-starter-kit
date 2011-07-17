@@ -196,10 +196,10 @@ environment."
 (setq-default js-indent-level 2)
 
 ;; Facebook Java indentation style
-;; (setq-default c-basic-offset 2)
+(setq-default c-basic-offset 2)
 
 ;; Most files I'm working with use 4 space tabs...
-(setq-default c-basic-offset 4)
+;; (setq-default c-basic-offset 4)
 
 ;; Facebook Python indentation style
 (setq-default python-indent 2)
@@ -217,3 +217,11 @@ environment."
 
 ;; Magit
 (global-set-key "\C-cg" 'magit-status)
+
+;; Change Emacs font size
+(custom-set-faces '(default ((t (:height 100)))))
+
+;; Ignore prompt when killing a process
+(setq kill-buffer-query-functions
+      (remq 'process-kill-buffer-query-function
+            kill-buffer-query-functions))
