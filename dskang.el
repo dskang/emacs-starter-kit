@@ -163,9 +163,11 @@ environment."
 (setq exec-path (split-string (getenv "PATH") path-separator))
 
 ;; ERC settings
+(require 'erc)
 ;; (setq erc-fill-column 72)
 ;; (require 'erc-highlight-nicknames)
 ;; (erc-highlight-nicknames-enable)
+(setq erc-keywords '("danielkang"))
 
 ;; File associations
 (setq auto-mode-alist (cons '("README" . text-mode) auto-mode-alist))
@@ -216,6 +218,7 @@ environment."
 (setq vc-handled-backends nil)
 
 ;; Magit
+(setq magit-omit-untracked-dir-contents t)
 (global-set-key "\C-cg" 'magit-status)
 
 ;; Change Emacs font size
