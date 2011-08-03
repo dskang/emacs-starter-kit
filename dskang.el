@@ -165,9 +165,16 @@ environment."
 ;; ERC settings
 (require 'erc)
 ;; (setq erc-fill-column 72)
-;; (require 'erc-highlight-nicknames)
-;; (erc-highlight-nicknames-enable)
-(setq erc-keywords '("danielkang"))
+(setq erc-keywords '("_food_" "_fyi_"))
+(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                                "324" "329" "332" "333" "338" "353" "477"))
+;; Set reasons for /part and /quit
+(setq erc-part-reason 'erc-part-reason-various)
+(setq erc-quit-reason 'erc-quit-reason-various)
+(setq erc-part-reason-various-alist
+      '(("version" erc-part-reason-normal)
+        ("home" "Going home!")
+        ("^$" "")))
 
 ;; File associations
 (setq auto-mode-alist (cons '("README" . text-mode) auto-mode-alist))
@@ -231,3 +238,9 @@ environment."
 
 ;; Shell
 (setq comint-prompt-read-only t)
+
+;; Turn off visible bell
+(setq visible-bell nil)
+
+;; Don't automatically compile after saving in SCSS mode
+(setq scss-compile-at-save nil)
