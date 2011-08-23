@@ -244,3 +244,6 @@ environment."
 
 ;; Don't automatically compile after saving in SCSS mode
 (setq scss-compile-at-save nil)
+
+;; Org mode
+(setq org-log-done 'time)
