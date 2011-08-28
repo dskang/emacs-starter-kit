@@ -245,5 +245,16 @@ environment."
 ;; Don't automatically compile after saving in SCSS mode
 (setq scss-compile-at-save nil)
 
-;; Org mode
+;; Org
 (setq org-log-done 'time)
+(setq org-agenda-files (list "~/Dropbox/org/work.org"
+                             "~/Dropbox/org/personal.org"
+                             "~/Dropbox/org/school.org"))
+
+;; Don't echo line in irb
+(defun echo-false-comint ()
+  (setq comint-process-echoes t))
+(add-hook 'inf-ruby-mode-hook 'echo-false-comint)
+
+;; Set lisp program to be used for SLIME
+(setq inferior-lisp-program 'clisp)
