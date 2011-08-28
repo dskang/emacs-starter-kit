@@ -257,4 +257,4 @@ environment."
 (add-hook 'inf-ruby-mode-hook 'echo-false-comint)
 
 ;; Set lisp program to be used for SLIME
-(setq inferior-lisp-program 'clisp)
+(setq inferior-lisp-program "clisp -K full")
