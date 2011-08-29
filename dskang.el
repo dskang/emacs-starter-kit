@@ -284,4 +284,7 @@ environment."
 (add-hook 'inf-ruby-mode-hook 'echo-false-comint)
 
 ;; Set lisp program to be used for SLIME
-;; (setq inferior-lisp-program "clisp -K full")
+(add-to-list 'load-path "~/.emacs.d/dskang/slime/")
+(setq inferior-lisp-program "clisp")
+(require 'slime)
+(slime-setup)
