@@ -286,5 +286,5 @@ environment."
 ;; Set lisp program to be used for SLIME
 (add-to-list 'load-path "~/.emacs.d/dskang/slime/")
 (setq inferior-lisp-program "clisp")
-(require 'slime)
+(require 'slime-autoloads)
 (slime-setup)
