@@ -287,4 +287,4 @@ environment."
 (add-to-list 'load-path "~/.emacs.d/dskang/slime/")
 (setq inferior-lisp-program "clisp")
 (require 'slime-autoloads)
-(slime-setup)
+(slime-setup '(slime-repl))
