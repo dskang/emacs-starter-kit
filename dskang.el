@@ -288,3 +288,11 @@ environment."
 (setq inferior-lisp-program "clisp")
 (require 'slime-autoloads)
 (slime-setup '(slime-repl))
+
+;; Haskell
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(require 'inf-haskell)
+
+;; Assembler mode
+(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
