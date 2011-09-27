@@ -273,10 +273,7 @@ environment."
 (setq scss-compile-at-save nil)
 
 ;; Org
-(setq org-log-done 'time)
-(setq org-agenda-files (list "~/Dropbox/org/work.org"
-                             "~/Dropbox/org/personal.org"
-                             "~/Dropbox/org/school.org"))
+(setq org-agenda-files '("~/Dropbox/org/" "~/Dropbox/org/courses/"))
 
 ;; Don't echo line in irb
 (defun echo-false-comint ()
