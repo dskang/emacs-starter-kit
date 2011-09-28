@@ -274,6 +274,7 @@ environment."
 
 ;; Org
 (setq org-agenda-files '("~/Dropbox/org/" "~/Dropbox/org/courses/"))
+(setq org-CUA-compatible t) ;; Avoid conflicts with windmove
 
 ;; Don't echo line in irb
 (defun echo-false-comint ()
