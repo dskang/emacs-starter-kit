@@ -273,8 +273,8 @@ environment."
 (setq scss-compile-at-save nil)
 
 ;; Org
+(custom-set-variables '(org-replace-disputed-keys t)) ;; Avoid conflicts with windmove
 (setq org-agenda-files '("~/Dropbox/org/" "~/Dropbox/org/courses/"))
-(setq org-CUA-compatible t) ;; Avoid conflicts with windmove
 
 ;; Don't echo line in irb
 (defun echo-false-comint ()
