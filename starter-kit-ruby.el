@@ -9,8 +9,9 @@
      (setq ruby-use-encoding-map nil)
      (add-hook 'ruby-mode-hook 'inf-ruby-keys)
      (define-key ruby-mode-map (kbd "RET") 'reindent-then-newline-and-indent)
-     (define-key ruby-mode-map (kbd "C-M-h") 'backward-kill-word)
-     (define-key ruby-mode-map (kbd "C-c l") "lambda")))
+     ;; Commented out for org-store-link
+     ;; (define-key ruby-mode-map (kbd "C-c l") "lambda")
+     (define-key ruby-mode-map (kbd "C-M-h") 'backward-kill-word)))
 
 (global-set-key (kbd "C-h r") 'ri)
 
