@@ -164,7 +164,7 @@ environment."
 
 ;; ERC settings
 (require 'erc)
-;; (setq erc-fill-column 72)
+(setq erc-fill-column 72)
 (setq erc-keywords '("_food_" "_fyi_"))
 (setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
                                 "324" "329" "332" "333" "338" "353" "477"))
@@ -294,3 +294,6 @@ environment."
 
 ;; Assembler mode
 (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+
+;; CSS
+(add-hook 'scss-mode-hook '(lambda () (setq css-indent-offset 2)))
