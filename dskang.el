@@ -231,8 +231,7 @@ environment."
 ;; Facebook JS indentation style
 (setq-default js-indent-level 2)
 
-;; Facebook Java indentation style
-(setq-default c-basic-offset 2)
+(setq-default c-basic-offset 4)
 
 ;; Most files I'm working with use 4 space tabs...
 ;; (setq-default c-basic-offset 4)
