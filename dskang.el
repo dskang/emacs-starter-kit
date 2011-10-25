@@ -208,10 +208,6 @@ environment."
 (add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
-;; Display date and time in status bar
-(setq display-time-day-and-date t)
-(display-time)
-
 ;; Start Emacs server
 (server-start)
 
@@ -296,3 +292,8 @@ environment."
 
 ;; CSS
 (add-hook 'scss-mode-hook '(lambda () (setq css-indent-offset 2)))
+
+;; Evil mode
+(add-to-list 'load-path (concat user-specific-dir "/evil"))
+(require 'evil)
+(evil-mode 1)
