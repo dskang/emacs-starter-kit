@@ -294,6 +294,11 @@ environment."
 (add-hook 'scss-mode-hook '(lambda () (setq css-indent-offset 2)))
 
 ;; Evil mode
+(setq evil-want-C-u-scroll t)
+(setq evil-want-C-w-in-emacs-state t)
 (add-to-list 'load-path (concat user-specific-dir "/evil"))
 (require 'evil)
 (evil-mode 1)
+
+;; Bind kill-region since C-w is taken by window switching
+(global-set-key "\C-x\C-k" 'kill-region)
