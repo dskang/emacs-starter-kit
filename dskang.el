@@ -369,6 +369,15 @@ environment."
 (evil-define-key 'normal org-mode-map "T" 'org-todo) ; mark a TODO item as DONE
 (evil-define-key 'normal org-mode-map "-" 'org-cycle-list-bullet) ; change bullet style
 
+(evil-define-key 'normal org-mode-map (kbd "M-l") 'org-metaright)
+(evil-define-key 'normal org-mode-map (kbd "M-h") 'org-metaleft)
+(evil-define-key 'normal org-mode-map (kbd "M-k") 'org-metaup)
+(evil-define-key 'normal org-mode-map (kbd "M-j") 'org-metadown)
+(evil-define-key 'normal org-mode-map (kbd "M-L") 'org-shiftmetaright)
+(evil-define-key 'normal org-mode-map (kbd "M-H") 'org-shiftmetaleft)
+(evil-define-key 'normal org-mode-map (kbd "M-K") 'org-shiftmetaup)
+(evil-define-key 'normal org-mode-map (kbd "M-J") 'org-shiftmetadown)
+
 ;; Org agenda - leave in Emacs mode but add j & k
 (define-key org-agenda-mode-map "j" 'evil-next-line)
 (define-key org-agenda-mode-map "k" 'evil-previous-line)
