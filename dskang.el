@@ -267,7 +267,7 @@ environment."
 ;; Don't automatically compile after saving in SCSS mode
 (setq scss-compile-at-save nil)
 
-;; Org
+;; Org-mode
 (custom-set-variables '(org-replace-disputed-keys t)) ;; Avoid conflicts with windmove
 (setq org-agenda-files '("~/Dropbox/org/" "~/Dropbox/org/courses/"))
 
@@ -302,3 +302,74 @@ environment."
 
 ;; Bind kill-region since C-w is taken by window switching
 (global-set-key "\C-x\C-k" 'kill-region)
+
+;; Use 'jk' as ESC
+;; http://permalink.gmane.org/gmane.emacs.vim-emulation/684
+(define-key evil-insert-state-map "j" #'cofi/maybe-exit)
+
+(evil-define-command cofi/maybe-exit ()
+  :repeat change
+  (interactive)
+  (let ((modified (buffer-modified-p)))
+    (insert "j")
+    (let ((evt (read-event (format "Insert %c to exit insert state" ?k)
+			   nil 0.5)))
+      (cond
+       ((null evt) (message ""))
+       ((and (integerp evt) (char-equal evt ?k))
+	(delete-char -1)
+	(set-buffer-modified-p modified)
+	(push 'escape unread-command-events))
+       (t (setq unread-command-events (append unread-command-events
+					      (list evt))))))))
+;; Show red box if in Emacs mode
+(setq evil-emacs-state-cursor '("red" box))
+
+; General commands
+(define-key evil-normal-state-map ",w" 'save-buffer) ; save
+(define-key evil-normal-state-map ",q" 'kill-buffer) ; quit
+(define-key evil-normal-state-map ",x" 'save-buffers-kill-emacs) ; save and quit
+(define-key evil-normal-state-map ",f" 'ido-find-file) ; find file
+(define-key evil-normal-state-map ",b" 'ido-switch-buffer) ; show buffers
+(define-key evil-normal-state-map ",o" 'org-agenda)  ; show org agenda
+
+;; Lisp
+(evil-define-key 'visual emacs-lisp-mode-map ",," 'eval-region)
+
+;; Org-mode
+(defun always-insert-item ()
+     (interactive)
+     (if (not (org-in-item-p))
+       (insert "\n- ")
+       (org-insert-item)))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+(evil-define-key 'normal org-mode-map "O" (lambda ()
+                                            (interactive)
+                                            (end-of-line)
+                                            (org-insert-heading t)
+                                            (evil-append nil)
+                                            ))
+
+(evil-define-key 'normal org-mode-map "o" (lambda ()
+                                            (interactive)
+                                            (end-of-line)
+                                            (always-insert-item)
+                                            (evil-append nil)
+                                            ))
+
+(evil-define-key 'normal org-mode-map "t" (lambda ()
+                     (interactive)
+                     (end-of-line)
+                     (org-insert-todo-heading nil)
+                     (evil-append nil)
+                     ))
+
+(evil-define-key 'normal org-mode-map "T" 'org-todo) ; mark a TODO item as DONE
+(evil-define-key 'normal org-mode-map "-" 'org-cycle-list-bullet) ; change bullet style
+
+;; Org agenda - leave in Emacs mode but add j & k
+(define-key org-agenda-mode-map "j" 'evil-next-line)
+(define-key org-agenda-mode-map "k" 'evil-previous-line)
+))
