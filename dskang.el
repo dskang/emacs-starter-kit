@@ -277,10 +277,25 @@ environment."
 (add-hook 'inf-ruby-mode-hook 'echo-false-comint)
 
 ;; Set lisp program to be used for SLIME
-(add-to-list 'load-path "~/.emacs.d/dskang/slime/")
+(add-to-list 'load-path (concat user-specific-dir "/slime"))
 (setq inferior-lisp-program "clisp")
 (require 'slime-autoloads)
 (slime-setup '(slime-repl))
+
+;; Set up nXhtml mode
+(load (concat user-specific-dir "/nxhtml/autostart.el"))
+(setq mumamo-background-colors nil)
+;; Mumamo is making emacs 23.3 freak out:
+;; http://stackoverflow.com/questions/5468952/how-do-i-hide-emacs-obsolete-variable-warnings
+(when (and (equal emacs-major-version 23)
+           (equal emacs-minor-version 3))
+  (eval-after-load "bytecomp"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function))
+  ;; tramp-compat.el clobbers this variable!
+  (eval-after-load "tramp-compat"
+    '(add-to-list 'byte-compile-not-obsolete-vars
+                  'font-lock-beginning-of-syntax-function)))
 
 ;; Haskell
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -328,7 +343,6 @@ environment."
 ; General commands
 (define-key evil-normal-state-map ",w" 'save-buffer) ; save
 (define-key evil-normal-state-map ",q" 'kill-buffer) ; quit
-(define-key evil-normal-state-map ",x" 'save-buffers-kill-emacs) ; save and quit
 (define-key evil-normal-state-map ",f" 'ido-find-file) ; find file
 (define-key evil-normal-state-map ",b" 'ido-switch-buffer) ; show buffers
 (define-key evil-normal-state-map ",o" 'org-agenda)  ; show org agenda
