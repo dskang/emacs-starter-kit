@@ -283,7 +283,8 @@ environment."
 (slime-setup '(slime-repl))
 
 ;; Set up nXhtml mode
-(load (concat user-specific-dir "/nxhtml/autostart.el"))
+;; NOTE: nxhtml breaks evil-mode so only use when needed
+;; (load (concat user-specific-dir "/nxhtml/autostart.el"))
 (setq mumamo-background-colors nil)
 ;; Mumamo is making emacs 23.3 freak out:
 ;; http://stackoverflow.com/questions/5468952/how-do-i-hide-emacs-obsolete-variable-warnings
