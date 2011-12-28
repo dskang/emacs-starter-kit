@@ -341,7 +341,11 @@ environment."
 ;; Show red box if in Emacs mode
 (setq evil-emacs-state-cursor '("red" box))
 
-; General commands
+;; Move using visual lines
+(define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
+;; General commands
 (define-key evil-normal-state-map ",w" 'save-buffer) ; save
 (define-key evil-normal-state-map ",q" 'kill-buffer) ; quit
 (define-key evil-normal-state-map ",f" 'ido-find-file) ; find file
